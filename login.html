@@ -25,7 +25,15 @@
                     <input type="password" id="password" placeholder="Пароль" required autocomplete="off">
                 </div>
 
-                <button type="submit" class="btn-primary login-btn">
+                <!-- Чекбокс согласия -->
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">
+                        Я согласен с <a href="privacy.html" target="_blank">Политикой конфиденциальности</a> и <a href="privacy.html#personal-data" target="_blank">обработкой персональных данных</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary login-btn" id="submit-btn" disabled>
                     <i class="fas fa-sign-in-alt"></i> Войти
                 </button>
             </form>
@@ -43,14 +51,29 @@
     </div>
 
     <script>
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const agreeCheckbox = document.getElementById('agree');
+        const submitBtn = document.getElementById('submit-btn');
+        const errorEl = document.getElementById('login-error');
+
+        // Активируем кнопку "Войти" только когда чекбокс отмечен
+        function toggleSubmitButton() {
+            submitBtn.disabled = !(usernameInput.value.trim() && passwordInput.value.trim() && agreeCheckbox.checked);
+        }
+
+        // Слушаем изменения
+        usernameInput.addEventListener('input', toggleSubmitButton);
+        passwordInput.addEventListener('input', toggleSubmitButton);
+        agreeCheckbox.addEventListener('change', toggleSubmitButton);
+
+        // Обработка формы входа
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const username = document.getElementById('username').value.trim().toLowerCase();
-            const password = document.getElementById('password').value.trim();
-            const errorEl = document.getElementById('login-error');
+            const username = usernameInput.value.trim().toLowerCase();
+            const password = passwordInput.value.trim();
 
-            // Очень простая проверка (в реальном проекте — никогда не делайте так!)
             const users = {
                 'admin':   { password: 'admin',   role: 'admin'    },
                 'manager': { password: 'manager', role: 'manager' },
@@ -128,10 +151,40 @@
             font-size: 1rem;
         }
 
+        /* Стили для чекбокса */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: #34495e;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3498db;
+        }
+
+        .checkbox-group label a {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        .checkbox-group label a:hover {
+            color: #2980b9;
+        }
+
         .login-btn {
             padding: 14px;
             font-size: 1.1rem;
             margin-top: 10px;
+        }
+
+        .login-btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
         }
 
         .error-message {
