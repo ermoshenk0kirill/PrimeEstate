@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Prime Estate</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Prime Estate</h1>
+            <p class="subtitle">Вход в личный кабинет</p>
+
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">Логин</label>
+                    <input type="text" id="username" placeholder="Логин" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" placeholder="Пароль" required autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn-primary login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+            </form>
+
+            <div id="login-error" class="error-message" style="display:none;">
+                Неверный логин или пароль
+            </div>
+
+            <p class="hint">Тестовые аккаунты:<br>
+                <strong>admin / admin</strong> — администратор<br>
+                <strong>manager / manager</strong> — менеджер<br>
+                <strong>user / user</strong> — обычный пользователь
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim().toLowerCase();
+            const password = document.getElementById('password').value.trim();
+            const errorEl = document.getElementById('login-error');
+
+            // Очень простая проверка (в реальном проекте — никогда не делайте так!)
+            const users = {
+                'admin':   { password: 'admin',   role: 'admin'    },
+                'manager': { password: 'manager', role: 'manager' },
+                'user':    { password: 'user',    role: 'user'     }
+            };
+
+            if (users[username] && users[username].password === password) {
+                // Успешный вход
+                localStorage.setItem('estateUserRole', users[username].role);
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                errorEl.style.display = 'block';
+                setTimeout(() => errorEl.style.display = 'none', 4000);
+            }
+        });
+    </script>
+
+    <style>
+        .login-page {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .login-container {
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        .login-card h1 {
+            margin: 0 0 8px;
+            color: #2c3e50;
+            font-size: 2.4rem;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            padding: 14px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            margin-top: 15px;
+            padding: 12px;
+            background: #ffebee;
+            color: #c62828;
+            border-radius: 6px;
+            border: 1px solid #ef9a9a;
+        }
+
+        .hint {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .hint strong {
+            color: #2c3e50;
+        }
+    </style>
+</body>
+</html>
