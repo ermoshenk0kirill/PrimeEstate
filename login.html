@@ -39,14 +39,21 @@
             </form>
 
             <div id="login-error" class="error-message" style="display:none;">
-                Неверный логин или пароль
-            </div>
+              Неверный логин или пароль
+          </div>
 
-            <p class="hint">Тестовые аккаунты:<br>
-                <strong>admin / admin</strong> — администратор<br>
-                <strong>manager / manager</strong> — менеджер<br>
-                <strong>user / user</strong> — обычный пользователь
-            </p>
+          <div class="auth-links">
+              <p class="hint">
+                  Нет аккаунта? 
+                  <a href="register.html">Зарегистрироваться</a>
+              </p>
+              <p class="hint" style="margin-top:12px;">
+                  Тестовые аккаунты:<br>
+                  <strong>admin / любой пароль</strong> — администратор<br>
+                  <strong>manager / любой пароль</strong> — менеджер<br>
+                  <strong>любой другой логин</strong> — обычный пользователь
+              </p>
+          </div>
         </div>
     </div>
 
@@ -68,28 +75,35 @@
         agreeCheckbox.addEventListener('change', toggleSubmitButton);
 
         // Обработка формы входа
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Обработка формы входа — теперь любой логин и пароль работают
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            const username = usernameInput.value.trim().toLowerCase();
-            const password = passwordInput.value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-            const users = {
-                'admin':   { password: 'admin',   role: 'admin'    },
-                'manager': { password: 'manager', role: 'manager' },
-                'user':    { password: 'user',    role: 'user'     }
-            };
+    // Минимальная проверка (чтобы не пустые)
+    if (username.length < 3 || password.length < 4) {
+        errorEl.style.display = 'block';
+        setTimeout(() => errorEl.style.display = 'none', 4000);
+        return;
+    }
 
-            if (users[username] && users[username].password === password) {
-                // Успешный вход
-                localStorage.setItem('estateUserRole', users[username].role);
-                localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = 'index.html';
-            } else {
-                errorEl.style.display = 'block';
-                setTimeout(() => errorEl.style.display = 'none', 4000);
-            }
-        });
+    // Имитация: любой логин/пароль → успешный вход
+    // По умолчанию даём роль "user", если логин не admin/manager
+    let role = 'user';
+
+    if (username.toLowerCase() === 'admin')    role = 'admin';
+    if (username.toLowerCase() === 'manager')  role = 'manager';
+
+    localStorage.setItem('estateUserRole', role);
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    // Показываем короткое уведомление
+    alert(`Добро пожаловать, ${username}! Вы вошли как ${role}`);
+    
+    window.location.href = 'index.html';
+});
     </script>
 
     <style>

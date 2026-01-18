@@ -643,3 +643,381 @@ footer {
       align-items: center;
   }
 }
+
+
+
+
+
+
+
+
+/* Стили для страниц авторизации (login.html и register.html) */
+.login-page {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 450px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 35px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+}
+
+.login-card h1 {
+  margin: 0 0 10px;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin-bottom: 35px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  text-align: left;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input:not([type="checkbox"]) {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.form-group input:not([type="checkbox"]):focus {
+  outline: none;
+  border-color: #3498db;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group input:not([type="checkbox"])::placeholder {
+  color: #95a5a6;
+}
+
+/* Стили для чекбокса */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #34495e;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #3498db;
+}
+
+.checkbox-group label {
+  font-weight: normal;
+  margin-bottom: 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.checkbox-group label a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.checkbox-group label a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #3498db;
+  transition: width 0.3s;
+}
+
+.checkbox-group label a:hover {
+  color: #2980b9;
+}
+
+.checkbox-group label a:hover::after {
+  width: 100%;
+}
+
+/* Стили кнопки входа/регистрации */
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.login-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-btn:disabled {
+  background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Сообщения об ошибках и успехе */
+.error-message {
+  margin-top: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #c62828;
+  border-radius: 8px;
+  border-left: 4px solid #c62828;
+  font-size: 0.95rem;
+  text-align: left;
+  animation: slideIn 0.3s ease;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+  border-radius: 8px;
+  border-left: 4px solid #2e7d32;
+  font-size: 1rem;
+  text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+.success-message a {
+  color: #2e7d32;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.success-message a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #2e7d32;
+  transition: width 0.3s;
+}
+
+.success-message a:hover {
+  color: #1b5e20;
+}
+
+.success-message a:hover::after {
+  width: 100%;
+}
+
+@keyframes slideIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Ссылки под формой */
+.auth-links {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.hint {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+.hint a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.hint a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.hint strong {
+  color: #2c3e50;
+  background-color: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Стили для тестовых аккаунтов в login.html */
+.auth-links .hint:last-child {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: 1px dashed #bdc3c7;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 576px) {
+  .login-card {
+      padding: 30px 25px;
+  }
+  
+  .login-card h1 {
+      font-size: 2rem;
+  }
+  
+  .subtitle {
+      font-size: 1rem;
+  }
+  
+  .login-form {
+      gap: 20px;
+  }
+  
+  .form-group input:not([type="checkbox"]) {
+      padding: 12px 14px;
+  }
+  
+  .checkbox-group {
+      font-size: 0.9rem;
+  }
+  
+  .login-btn {
+      padding: 14px;
+      font-size: 1rem;
+  }
+  
+  .hint {
+      font-size: 0.9rem;
+  }
+}
+
+/* Анимация для иконок */
+.login-btn i {
+  transition: transform 0.3s ease;
+}
+
+.login-btn:hover:not(:disabled) i {
+  transform: translateX(3px);
+}
+
+/* Индикаторы валидации */
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: #2ecc71;
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: #e74c3c;
+}
+
+/* Дополнительные стили для register.html */
+.password-strength {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.password-strength.weak {
+  color: #e74c3c;
+}
+
+.password-strength.medium {
+  color: #f39c12;
+}
+
+.password-strength.strong {
+  color: #2ecc71;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Prime Estate</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Prime Estate</h1>
+            <p class="subtitle">Создание нового аккаунта</p>
+
+            <form id="register-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" placeholder="example@mail.ru" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Логин</label>
+                    <input type="text" id="username" placeholder="Придумайте логин" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" placeholder="Минимум 6 символов" required autocomplete="off">
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">
+                        Я согласен с <a href="privacy.html" target="_blank">Политикой конфиденциальности</a> и обработкой персональных данных
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary login-btn" id="submit-btn" disabled>
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </button>
+            </form>
+
+            <div id="register-success" class="success-message" style="display:none;">
+                Регистрация успешна! Теперь вы можете <a href="login.html">войти</a> в аккаунт
+            </div>
+
+            <div id="register-error" class="error-message" style="display:none;">
+                Пожалуйста, заполните все поля корректно
+            </div>
+
+            <p class="hint" style="margin-top:25px;">
+                Уже есть аккаунт? <a href="login.html" style="color:#3498db;">Войти</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const agreeCheckbox = document.getElementById('agree');
+        const submitBtn = document.getElementById('submit-btn');
+        const successEl = document.getElementById('register-success');
+        const errorEl = document.getElementById('register-error');
+
+        // Активация кнопки только при заполненных полях и согласии
+        function toggleSubmitButton() {
+            const isValid = 
+                emailInput.value.trim() && 
+                usernameInput.value.trim().length >= 3 && 
+                passwordInput.value.trim().length >= 6 && 
+                agreeCheckbox.checked;
+
+            submitBtn.disabled = !isValid;
+        }
+
+        emailInput.addEventListener('input', toggleSubmitButton);
+        usernameInput.addEventListener('input', toggleSubmitButton);
+        passwordInput.addEventListener('input', toggleSubmitButton);
+        agreeCheckbox.addEventListener('change', toggleSubmitButton);
+
+        // Имитация регистрации (ничего не сохраняем, просто красивая анимация успеха)
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Простая проверка формата (чисто косметическая)
+            if (!email.includes('@') || password.length < 6 || username.length < 3) {
+                errorEl.textContent = "Проверьте правильность введённых данных";
+                errorEl.style.display = 'block';
+                setTimeout(() => errorEl.style.display = 'none', 4000);
+                return;
+            }
+
+            // Показываем успех
+            successEl.style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+
+            // Через 2,5 секунды перенаправляем на страницу входа
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2500);
+        });
+    </script>
+
+    <style>
+        /* Стили те же, что и в login.html + небольшие дополнения */
+        .success-message {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 8px;
+            border: 1px solid #a5d6a7;
+            font-size: 1.1rem;
+        }
+
+        .success-message a {
+            color: #2e7d32;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</body>
+</html>
