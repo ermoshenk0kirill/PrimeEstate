@@ -7,7 +7,7 @@ let apartments = [
         rooms: 3,
         area: 85.5,
         address: "ул. Центральная, д. 15",
-        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://dizayn-interera.moscow/images/blog/111/0_ta0g-5m.jpg",
         inCart: 0
     },
     {
@@ -18,7 +18,7 @@ let apartments = [
         rooms: 1,
         area: 38.2,
         address: "пр. Новый, д. 42",
-        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://www.ivd.ru/images/cache/2021/10/20/fit_960_530_false_crop_1800_1012_0_94_q90_1989702_b036c2c7fe3356834bc0c427f.jpeg",
         inCart: 0
     },
     {
@@ -29,7 +29,7 @@ let apartments = [
         rooms: 2,
         area: 62.7,
         address: "ул. Метростроителей, д. 8",
-        image: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://evdom.ru/wp-content/uploads/2018/08/1-8-1000x563.jpg",
         inCart: 0
     },
     {
@@ -40,7 +40,7 @@ let apartments = [
         rooms: 4,
         area: 145.0,
         address: "ул. Престижная, д. 1",
-        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://www.topdom.ru/gallery/flats/94/1-l.jpg",
         inCart: 0
     }
 ];
